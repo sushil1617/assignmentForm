@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import Ls from "@/utility/localStorage";
 
 // ---------------------------------------------
 // Create an Axios instance
@@ -73,7 +73,8 @@ class apiService {
   // option - custom axios options such as headers
   // data   - request body for POST/PUT methods
   async execute(method, path, option, data) {
-    // let token = localStorage.getItem("access_token");
+
+    // let token = Ls.get("jwtToken");
 
     let token = 'JWTTokenString'; 
     let headers = {
