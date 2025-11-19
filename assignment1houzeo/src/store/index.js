@@ -4,21 +4,21 @@ import { createStore } from "vuex";
 export default createStore({
 
     state: {
-        token: null,
+        id: null,
     },
     getters: {
        GET_ID(state){
-          return state.token;
+          return state.id;
        }
     },
     mutations: {
-       UPDATE_ID(state,token){
-            state.token = token;
+       UPDATE_ID(state,id){
+            state.id = id;
        }
     },
     actions: {
-       SET_ID({ commit }, token){
-          commit("UPDATE_TOKEN", token);
+       SET_ID({ commit }, id){
+          commit("UPDATE_ID", id);
        }
     }
 })

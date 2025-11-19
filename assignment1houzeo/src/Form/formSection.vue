@@ -1,7 +1,8 @@
 <template>
     <!-- FORM HEADING-->
     <div class="heading">
-        <b class="p-2">SAMPLE FORM</b>
+        <b class="title">SAMPLE FORM</b>
+        <p class="total">Total Forms: {{ totalForms }}</p   >
     </div>
 
     <!-- Loop through the dynamic form groups and render each section with a unique key -->
@@ -168,6 +169,12 @@ export default {
         };
     },
 
+    computed: {
+    totalForms() {
+        return this.forms.length;
+    }
+   },
+
     methods: {
         // Adds a new form group on clicking ADD MORE button 
         addGroup() {
@@ -266,8 +273,24 @@ export default {
 }
 
 .heading {
+    position: relative;
     background: #efd6b5;
     padding: 10px;
     font-size: 22px;
+    text-align: center; 
 }
+
+.title {
+    display: inline-block;
+}
+
+
+.total {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 15px;
+}
+
 </style>
