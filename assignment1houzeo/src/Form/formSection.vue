@@ -28,15 +28,15 @@
             </div>
 
             <!-- Mobile Number and Date of Birth Fields with formatting  -->
-                <div class="row mb-3 align-items-center">
-                    <div class="col-md-2 text-start">
-                        <label for="number" class="form-label"><b>Mobile Number:<span
-                                    class="text-danger">*</span></b></label>
-                    </div>
-                    <div class="col-md-4 text-start">
-                        <input v-model="form.mobile" type="text" id="number" placeholder="(844) 448-0110"
-                            @input="formatMobile(index,$event)" class="form-control" />
-                    </div>
+            <div class="row mb-3 align-items-center">
+                <div class="col-md-2 text-start">
+                    <label for="number" class="form-label"><b>Mobile Number:<span
+                                class="text-danger">*</span></b></label>
+                </div>
+                <div class="col-md-4 text-start">
+                    <input v-model="form.mobile" type="text" id="number" placeholder="(844) 448-0110"
+                        @input="formatMobile(index, $event)" class="form-control" />
+                </div>
 
                 <div class="col-md-2 text-start">
                     <label for="dateBirth" class="form-label"><b>D.O.B:<span class="text-danger">*</span></b></label>
@@ -98,7 +98,7 @@
                 </div>
                 <div class="col-md-4 text-start">
                     <!-- File Upload Field for JPEG and PDF -->
-                    <input type="file" id="file" @change="handleFile(index,$event)" accept="image/jpeg,application/pdf"
+                    <input type="file" id="file" @change="handleFile(index, $event)" accept="image/jpeg,application/pdf"
                         class="form-control" />
                 </div>
             </div>
@@ -126,7 +126,7 @@
 
 
 <script>
-import FormTable from "./tableDisplay.vue";
+import FormTable from "../components/tableDisplay.vue";
 // import api from "../services/apiService";
 
 export default {
@@ -194,9 +194,9 @@ export default {
         },
 
         // Format mobile number to (xxx) xxx-xxxx automatically as user types
-        formatMobile(index,e) {
+        formatMobile(index, e) {
             // keep only numbers
-            let digits = e.target.value.replace(/\D/g, ""); 
+            let digits = e.target.value.replace(/\D/g, "");
 
             // Limit to 10 digits
             digits = digits.substring(0, 10);
