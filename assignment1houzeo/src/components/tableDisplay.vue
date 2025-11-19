@@ -45,6 +45,9 @@
 export default {
   // Receiving submitted rows from parent component as props(assignmentForm)
   props: { rows: Array },
+  mounted(){
+    console.log(this.rows);
+  },
   methods: {
     // Convert raw birthdate value into readable format
     formattedDOB(birthdate) {

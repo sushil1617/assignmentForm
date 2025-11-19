@@ -28,15 +28,15 @@
             </div>
 
             <!-- Mobile Number and Date of Birth Fields with formatting  -->
-            <div class="row mb-3 align-items-center">
-                <div class="col-md-2 text-start">
-                    <label for="number" class="form-label"><b>Mobile Number:<span
-                                class="text-danger">*</span></b></label>
-                </div>
-                <div class="col-md-4 text-start">
-                    <input v-model="form.mobile" type="text" id="number" placeholder="(844) 448-0110"
-                        @input="formatMobile" class="form-control" />
-                </div>
+                <div class="row mb-3 align-items-center">
+                    <div class="col-md-2 text-start">
+                        <label for="number" class="form-label"><b>Mobile Number:<span
+                                    class="text-danger">*</span></b></label>
+                    </div>
+                    <div class="col-md-4 text-start">
+                        <input v-model="form.mobile" type="text" id="number" placeholder="(844) 448-0110"
+                            @input="formatMobile(index,$event)" class="form-control" />
+                    </div>
 
                 <div class="col-md-2 text-start">
                     <label for="dateBirth" class="form-label"><b>D.O.B:<span class="text-danger">*</span></b></label>
@@ -98,7 +98,7 @@
                 </div>
                 <div class="col-md-4 text-start">
                     <!-- File Upload Field for JPEG and PDF -->
-                    <input type="file" id="file" @change="handleFile(index)" accept="image/jpeg,application/pdf"
+                    <input type="file" id="file" @change="handleFile(index,$event)" accept="image/jpeg,application/pdf"
                         class="form-control" />
                 </div>
             </div>
@@ -194,18 +194,23 @@ export default {
         },
 
         // Format mobile number to (xxx) xxx-xxxx automatically as user types
-        formatMobile(e) {
-            let digits = e.target.value.replace(/\D/g, "");  // Remove all non-numeric chars
-            if (digits.length <= 10) {
-                let formatted = digits.replace(
-                    /(\d{3})(\d{3})(\d{4})/,
-                    "($1) $2-$3"
-                );
-                console.log(formatted);
-                return formatted;
-                // this.group.mobile = formatted;
+        formatMobile(index,e) {
+            // keep only numbers
+            let digits = e.target.value.replace(/\D/g, ""); 
+
+            // Limit to 10 digits
+            digits = digits.substring(0, 10);
+
+            // Format only when enough digits exist
+            if (digits.length >= 6) {
+                this.forms[index].mobile = digits.replace(/(\d{3})(\d{3})(\d{0,4})/, "($1) $2-$3");
+            } else if (digits.length >= 3) {
+                this.forms[index].mobile = digits.replace(/(\d{3})(\d{0,3})/, "($1) $2");
+            } else {
+                this.forms[index].mobile = digits;
             }
         },
+
 
         // Submit form fields from one specific group on which it is clicked
         async submitForm(index) {
